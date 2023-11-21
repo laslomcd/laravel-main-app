@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="username-register" class="text-muted mb-1"><small>Username</small></label>
                         <input name="username" id="username-register" class="form-control @error('username') is-invalid @enderror" type="text"
-                               placeholder="Pick a username" autocomplete="off"/>
+                               placeholder="Pick a username" autocomplete="off" value="{{ old('username') }}"/>
                         @error('username')
                             <p class="m-0 small" style="color: red">{{ $message }}</p>
                         @enderror
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="email-register" class="text-muted mb-1"><small>Email</small></label>
                         <input name="email" id="email-register" class="form-control  @error('email') is-invalid @enderror" type="text"
-                               placeholder="you@example.com" autocomplete="off"/>
+                               placeholder="you@example.com" autocomplete="off" value="{{ old('email') }}"/>
                         @error('email')
                         <p class="m-0 small" style="color: red">{{ $message }}</p>
                         @enderror

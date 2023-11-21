@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', [ExampleController::class, 'homepage']);
-Route::get('/about', [ExampleController::class, 'about']);
+Route::get('/', [UserController::class, 'showCorrectHomepage']);
 
 Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout']);
+

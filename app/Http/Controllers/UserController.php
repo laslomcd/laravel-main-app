@@ -15,7 +15,42 @@ class UserController extends Controller
             'password' => 'required|min:8|confirmed'
         ]);
         $registerFields['password'] = bcrypt($registerFields['password']);
-        User::create($registerFields);
-        return "Hello";
+        $user = User::create($registerFields);
+        auth()->login($user);
+
+        return redirect('/')->with('success', 'Thanks you for creating an account!');
+    }
+
+    public function login(Request $request)
+    {
+        $loginFields = $request->validate([
+           'loginusername' => 'required',
+           'loginpassword' => 'required'
+        ]);
+
+        if(auth()->attempt([
+            'username' => $loginFields['loginusername'],
+            'password' => $loginFields['loginpassword']
+        ])) {
+            $request->session()->regenerate();
+            return redirect('/')->with('success', 'You have successfully logged in!');
+        } else {
+            return redirect('/')->with('error', 'Invalid login credentials');
+        }
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/')->with('success', 'You are now logged out');
+    }
+
+    public function showCorrectHomepage()
+    {
+        if(auth()->check()) {
+            return view('homepage-feed');
+        } else {
+            return view('homepage');
+        }
     }
 }

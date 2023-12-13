@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function index(User $user): Factory|View|Application
+    {
+
+        return view('profile-posts');
+    }
     public function register(Request $request)
     {
         $registerFields = $request->validate([
